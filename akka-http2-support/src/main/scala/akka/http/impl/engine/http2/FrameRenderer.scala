@@ -28,6 +28,24 @@ object FrameRenderer {
           streamId,
           headerBlockFragment
         )
+
+      case SettingsFrame(settings) ⇒
+        // FIXME
+        renderFrame(
+          Protocol.FrameType.SETTINGS,
+          0,
+          0,
+          ByteString.empty
+        )
+
+      case SettingsAckFrame ⇒
+        // FIXME
+        renderFrame(
+          Protocol.FrameType.SETTINGS,
+          Protocol.Flags.ACK,
+          0,
+          ByteString.empty
+        )
     }
 
   def flag(bit: Boolean, flag: Int): Int =
