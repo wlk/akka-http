@@ -13,7 +13,7 @@ import akka.stream.scaladsl.Source
 import akka.util.ByteString
 
 /** Represents one direction of an Http2 substream */
-case class Http2SubStream(initialFrame: StreamFrameEvent, frames: Source[StreamFrameEvent, _]) {
+case class Http2SubStream(initialFrame: HeadersFrame /* would that need to be changed to support PUSH_PROMISE? */ , frames: Source[StreamFrameEvent, _]) {
   def streamId: Int = initialFrame.streamId
 }
 
@@ -49,5 +49,5 @@ object Http2Blueprint {
    * bindAndHandle the user needs to take of this manually.
    */
   def httpLayer(): BidiFlow[HttpResponse, Http2SubStream, Http2SubStream, HttpRequest, NotUsed] =
-    ???
+    BidiFlow.fromFlows(Http2TranslationLayer.rendering(), Http2TranslationLayer.parsing())
 }

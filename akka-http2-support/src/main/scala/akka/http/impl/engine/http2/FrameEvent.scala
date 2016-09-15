@@ -22,7 +22,7 @@ final case class HeadersFrame(
   streamId:            Int,
   endStream:           Boolean,
   endHeaders:          Boolean,
-  headerBlockFragment: ByteString) extends FrameEvent
+  headerBlockFragment: ByteString) extends StreamFrameEvent
 
 //final case class PriorityFrame(streamId: Int, streamDependency: Int, weight: Int) extends StreamFrameEvent
 //final case class RstStreamFrame(streamId: Int, errorCode: Int) extends StreamFrameEvent
